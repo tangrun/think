@@ -6,7 +6,7 @@ const { getConfig } = require('@think/config');
 const config = getConfig();
 
 const buildManifestJson = () => {
-  return JSON.stringify({
+  let obj = {
     name: config.client.seoAppName,
     short_name: config.client.seoAppName,
     display: 'standalone',
@@ -71,7 +71,12 @@ const buildManifestJson = () => {
         purpose: 'maskable',
       },
     ],
-  });
+  };
+  obj.start_url = (config.client.basePath || '') + obj.start_url;
+  for (let icon of obj.icons) {
+    icon.src = (config.client.basePath || '') + icon.src;
+  }
+  return JSON.stringify(obj);
 };
 
 fs.copySync('./public', './.next', {
@@ -82,4 +87,3 @@ fs.copySync('./public', './.next', {
 });
 
 fs.outputFileSync('./.next/manifest.json', buildManifestJson());
-fs.outputFileSync('./public/manifest.json', buildManifestJson());

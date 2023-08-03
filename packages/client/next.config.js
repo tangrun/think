@@ -7,6 +7,7 @@ const pwaRuntimeCaching = require('./pwa-cache');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = semi({
+  basePath: config.client.basePath || '',
   experimental: {
     scrollRestoration: true,
     legacyBrowsers: false,

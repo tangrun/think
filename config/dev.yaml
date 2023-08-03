@@ -2,6 +2,7 @@
 client:
   port: 5001
   assetPrefix: '/'
+  basePath: '/think'
   apiUrl: 'http://localhost:5002/api'
   collaborationUrl: 'ws://localhost:5003'
   # 以下为页面 meta 配置
